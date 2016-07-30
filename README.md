@@ -1,1 +1,1 @@
-# crusader_kings_2-bmfont_generator
+# Crusader Kings 2: BMFont Generator
