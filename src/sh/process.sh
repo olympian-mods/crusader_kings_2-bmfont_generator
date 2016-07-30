@@ -37,19 +37,28 @@ case "${ARG1}" in
   ;;
 esac
 
-FONT_BASENAME=${ARG1}
+
+WORKINGDIR=$(dirname "$(readlink -f "${ARG1}")")
+
+
+FONT_BASENAME=$(basename "${ARG1}" .fnt)
 FONT_FNT=${FONT_BASENAME}.fnt
 FONT_TGA=${FONT_BASENAME}_0.tga
+
+pushd "$WORKINGDIR" > /dev/null
+
 
 if [ ! -f "${FONT_FNT}" ]
   then
     echo "[ERROR] Could not find ${FONT_FNT}!"
+	popd > /dev/null
 	exit 1
 fi
 
 if [ ! -f "${FONT_TGA}" ]
   then
     echo "[ERROR] Could not find ${FONT_TGA}!"
+	popd > /dev/null
 	exit 1
 fi
 
@@ -63,3 +72,4 @@ mv "${FONT_TGA}" "${FONT_BASENAME}.tga"
 
 echo ""
 echo "Done!"
+popd > /dev/null
