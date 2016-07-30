@@ -4,7 +4,7 @@ VERSION="1.0.0"
 APP_NAME="BMFont Generator: CK2 Converter, ${VERSION}"
 
 function echoAppName() {
-	echo "${APP_NAME}"
+    echo "${APP_NAME}"
 }
 
 function echoUsage() {
@@ -29,8 +29,8 @@ ARG1=$1
 case "${ARG1}" in
   ""|"-h"|"--help")
     echoUsage
-	exit 0
-	;;
+    exit 0
+    ;;
   "-v"|"--version")
     echoAppName
     exit 0
@@ -48,15 +48,15 @@ pushd "$WORKINGDIR" > /dev/null
 if [ ! -f "${FONT_FNT}" ]
   then
     echo "[ERROR] Could not find ${FONT_FNT}!"
-	popd > /dev/null
-	exit 1
+    popd > /dev/null
+    exit 1
 fi
 
 if [ ! -f "${FONT_TGA}" ]
   then
     echo "[ERROR] Could not find ${FONT_TGA}!"
-	popd > /dev/null
-	exit 1
+    popd > /dev/null
+    exit 1
 fi
 
 echo "Converting ${FONT_FNT}..."
