@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0.0"
+VERSION="1.0.1"
 APP_NAME="BMFont Generator: CK2 Converter, ${VERSION}"
 
 function echoAppName() {
@@ -8,7 +8,7 @@ function echoAppName() {
 }
 
 function echoUsage() {
-  echo "Usage: $(basename $0) [OPTION] FONTFILE"
+  echo "Usage: $(basename "$0") [OPTION] FONTFILE"
   echo "Convert BMFont files for Crusader Kings 2."
   echo ""
   echo "Options:"
@@ -21,7 +21,7 @@ function echoUsage() {
   echo "The .tga file will be renamed during the process to match the name of the .fnt file."
   echo ""
   echo "Examples:"
-  echo "  $(basename $0) /tmp/fonts/century_gothic_bold_18.fnt"
+  echo "  $(basename "$0") /tmp/fonts/century_gothic_bold_18.fnt"
 }
 
 ARG1=$1
