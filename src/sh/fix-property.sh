@@ -8,20 +8,21 @@ function echoAppName() {
 }
 
 function echoUsage() {
+	local SCRIPTNAME=$(basename "$0")
 	echo "NAME"
-	echo "       $(basename "$0") - modifies a property in a BMFont .fnt file."
+	echo "       ${SCRIPTNAME} - modifies a property in a BMFont .fnt file."
 	echo ""
 	echo "SYNOPSIS"
-	echo "       $(basename "$0") -p PROPERTY -a VALUE"
+	echo "       ${SCRIPTNAME} -p PROPERTY -a VALUE"
 	echo ""
 	echo "OPTIONS"
-	echo "       -p     name of the property to be modified"
-	echo "       -a     value to be added to the specified property's value"
+	echo "       -p     specifies the name of the property to be modified"
+	echo "       -a     specifies the posotive or negative value to be added to the specified property's value."
 	echo "       -v     output version information and exit"
 	echo "       -h     display this help and exit"
 	echo ""
 	echo "EXAMPLES"
-	echo "       $(basename "$0") -p yoffset -a -3 /tmp/fonts/century_gothic_bold_18.fnt"
+	echo "       ${SCRIPTNAME} -p yoffset -a -3 /tmp/fonts/century_gothic_bold_18.fnt"
 	echo "              Add \"-3\" to value of property \"yoffset\" in file \"/tmp/fonts/century_gothic_bold_18.fnt\""
 }
 
