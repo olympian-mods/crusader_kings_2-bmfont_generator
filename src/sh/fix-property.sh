@@ -8,20 +8,21 @@ function echoAppName() {
 }
 
 function echoUsage() {
-  echo "Usage: $(basename "$0") -p PROPERTY -a VALUE"
-  echo "Modify BMFont properties"
-  echo ""
-  echo "Options:"
-  echo "  -v, --version      output version information and exit"
-  echo "  -h, --help         display this help and exit"
-  echo ""
-  echo "FONTFILE is the .fnt font file to be converted."
-  echo "In addition to the .fnt file a .tga file is expected in the"
-  echo "same directory with the '_0.tga' suffix, e.g. 'my_font_0.tga'."
-  echo "The .tga file will be renamed during the process to match the name of the .fnt file."
-  echo ""
-  echo "Examples:"
-  echo "  $(basename "$0") -p yoffset -a 2 /tmp/fonts/century_gothic_bold_18.fnt"
+	echo "NAME"
+	echo "       $(basename "$0") - modifies a property in a BMFont .fnt file."
+	echo ""
+	echo "SYNOPSIS"
+	echo "       $(basename "$0") -p PROPERTY -a VALUE"
+	echo ""
+	echo "OPTIONS"
+	echo "       -p     name of the property to be modified"
+	echo "       -a     value to be added to the specified property's value"
+	echo "       -v     output version information and exit"
+	echo "       -h     display this help and exit"
+	echo ""
+	echo "EXAMPLES"
+	echo "       $(basename "$0") -p yoffset -a -3 /tmp/fonts/century_gothic_bold_18.fnt"
+	echo "              Add \"-3\" to value of property \"yoffset\" in file \"/tmp/fonts/century_gothic_bold_18.fnt\""
 }
 
 PROPERTY=
@@ -30,25 +31,25 @@ ADDVALUE=
 while getopts ":p:a:hv" OPTION; do
   case "${OPTION}" in
     p)
-	  PROPERTY="${OPTARG}"
-	;;
+      PROPERTY="${OPTARG}"
+    ;;
     a)
       ADDVALUE="${OPTARG}"
-	;;
-	v)
-	  echoAppName
-	  exit 0
-	;;
-	h)
-	  echoUsage
-	  exit 0
-	;;
-    \?)
-	  echo "Unknown option -${OPTARG}!"
-	  echo ""
+    ;;
+    v)
+      echoAppName
+      exit 0
+    ;;
+    h)
       echoUsage
-	  exit 1
-	;;
+      exit 0
+    ;;
+    \?)
+      echo "Unknown option -${OPTARG}!"
+      echo ""
+      echoUsage
+      exit 1
+    ;;
   esac
 done
 
@@ -59,7 +60,7 @@ shift $((${OPTIND} - 1))
 if [ -z "${PROPERTY}" -a -z "${ADDVALUE}" ]
   then
     echoUsage
-	exit 1
+    exit 1
 fi
 
 ARG1=$1
@@ -76,9 +77,10 @@ if [ ! -f "${FONT_FNT}" ]
     exit 1
 fi
 
-echo "Modifying ${FONT_FNT}: add \"${ADDVALUE}\" to property \"${PROPERTY}\"..."
+echo "${FONT_FNT}: adding \"${ADDVALUE}\" to value of property \"${PROPERTY}\"..."
 
-sed -i -r 's/(.*yoffset=)([-0-9]+)(.*)/echo "\1$(echo "\2 + 100"|bc)\3"/ge' "${FONT_FNT}"
+# /e allows you to pass matched part to external command, and do substitution with the execution result. GNU sed only.
+sed -i -r 's/(.*'${PROPERTY}'=)([-0-9]+)(.*)/echo "\1$(echo "\2 + '${ADDVALUE}'"|bc)\3"/ge' "${FONT_FNT}"
 
 unix2dos "$FONT_FNT"
 
