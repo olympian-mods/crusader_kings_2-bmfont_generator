@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0.1"
+VERSION="1.0.2"
 APP_NAME="BMFont Generator: CK2 Converter, ${VERSION}"
 
 function echoAppName() {
@@ -60,7 +60,7 @@ if [ ! -f "${FONT_TGA}" ]
 fi
 
 echo "Converting ${FONT_FNT}..."
-sed -i -r -e 's/unicode=0\s*//g' -e 's/\s*outline=0//g' -e 's/\s*chnl=15//g' -e 's/\s*packed=.*//g' -e '3,4d' "${FONT_FNT}"
+sed -i -r -e 's/unicode=0\s*//g' -e 's/\s*outline=[0-9]+//g' -e 's/\s*chnl=15//g' -e 's/\s*packed=.*//g' -e '3,4d' "${FONT_FNT}"
 
 unix2dos "$FONT_FNT"
 
