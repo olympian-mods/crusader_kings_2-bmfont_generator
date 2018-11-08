@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0.0"
+VERSION="1.0.1"
 APP_NAME="BMFont Generator: Property Modifier, ${VERSION}"
 
 function echoAppName() {
@@ -17,7 +17,7 @@ function echoUsage() {
 	echo ""
 	echo "OPTIONS"
 	echo "       -p     specifies the name of the property to be modified"
-	echo "       -a     specifies the posotive or negative value to be added to the specified property's value."
+	echo "       -a     specifies the positive or negative value to be added to the specified property's value."
 	echo "       -v     output version information and exit"
 	echo "       -h     display this help and exit"
 	echo ""
